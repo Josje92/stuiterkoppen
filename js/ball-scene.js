@@ -28,6 +28,17 @@ const CAMERA_KICK_DECAY = 10; // higher = snaps back faster
 const KICK_SPEED = 9 * 2;
 const KICK_UP_SPEED = 6 * 2;
 
+// Cap the renderer/camera resolution so the scene never renders larger than this,
+// even on bigger windows or high-DPI displays.
+const MAX_RENDER_WIDTH = 1600;
+const MAX_RENDER_HEIGHT = 900;
+
+function getCappedSize() {
+  const width = Math.min(window.innerWidth, MAX_RENDER_WIDTH);
+  const height = Math.min(window.innerHeight, MAX_RENDER_HEIGHT);
+  return { width, height };
+}
+
 // Wall-mounted add button geometry/animation tuning.
 const BUTTON_RADIUS = 0.85;
 const BUTTON_DEPTH = 0.4;
@@ -44,16 +55,18 @@ export class BallScene {
     this.scene = new THREE.Scene();
     this.scene.background = new THREE.Color(0xcfe8ff);
 
+    const initialSize = getCappedSize();
+
     this.camera = new THREE.PerspectiveCamera(
       60,
-      window.innerWidth / window.innerHeight,
+      initialSize.width / initialSize.height,
       0.1,
       1000
     );
     this.camera.position.set(0, 3.5, 9);
 
     this.renderer = new THREE.WebGLRenderer({ canvas, antialias: true });
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.setSize(initialSize.width, initialSize.height, false);
     this.renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
     this.renderer.shadowMap.enabled = true;
     this.renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -281,9 +294,10 @@ export class BallScene {
   }
 
   _handleResize() {
-    this.camera.aspect = window.innerWidth / window.innerHeight;
+    const { width, height } = getCappedSize();
+    this.camera.aspect = width / height;
     this.camera.updateProjectionMatrix();
-    this.renderer.setSize(window.innerWidth, window.innerHeight);
+    this.renderer.setSize(width, height, false);
   }
 
   _handlePointerDown(event) {

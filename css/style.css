@@ -37,13 +37,13 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4rem;
+  gap: 8rem;
 }
 
 .rainbow-title {
   margin: 0;
   display: flex;
-  font-size: clamp(2.5rem, 9vw, 7rem);
+  font-size: clamp(5rem, 18vw, 14rem);
   letter-spacing: 0.02em;
   user-select: none;
 }
@@ -54,14 +54,14 @@ html, body {
 }
 
 .square-btn {
-  width: clamp(150px, 20vw, 220px);
-  height: clamp(150px, 20vw, 220px);
-  border-radius: 18px;
+  width: clamp(300px, 40vw, 440px);
+  height: clamp(300px, 40vw, 440px);
+  border-radius: 36px;
   background: #ffffff;
-  border: 6px solid #222;
+  border: 12px solid #222;
   cursor: pointer;
   position: relative;
-  padding: 10px;
+  padding: 20px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -71,7 +71,7 @@ html, body {
       #ff3b30, #ff9500, #ffcc00, #34c759, #00c7be, #30b0c7, #007aff, #5856d6, #af52de, #ff2d55);
   background-origin: border-box;
   background-clip: padding-box, border-box;
-  box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+  box-shadow: 0 20px 48px rgba(0,0,0,0.15);
   transition: transform 0.15s ease;
 }
 
@@ -84,7 +84,7 @@ html, body {
 }
 
 .square-btn span {
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-size: clamp(3.2rem, 6vw, 4.8rem);
   color: #222;
 }
 
@@ -106,23 +106,23 @@ html, body {
   border: none;
   background: transparent;
   font-family: "Letters for Learners", sans-serif;
-  font-size: 1.8rem;
+  font-size: 3.6rem;
   color: #222;
   cursor: pointer;
-  padding: 10px 14px;
+  padding: 20px 28px;
 }
 
 .corner-bottom-left {
-  left: 20px;
-  bottom: 20px;
+  left: 40px;
+  bottom: 40px;
 }
 
 .crosshair {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 22px;
-  height: 22px;
+  width: 44px;
+  height: 44px;
   transform: translate(-50%, -50%);
   pointer-events: none;
   z-index: 10;
@@ -139,7 +139,7 @@ html, body {
 .crosshair::before {
   left: 50%;
   top: 0;
-  width: 2px;
+  width: 4px;
   height: 100%;
   transform: translateX(-50%);
 }
@@ -147,21 +147,21 @@ html, body {
 .crosshair::after {
   top: 50%;
   left: 0;
-  height: 2px;
+  height: 4px;
   width: 100%;
   transform: translateY(-50%);
 }
 
 .fly-hint {
   position: fixed;
-  top: 16px;
+  top: 32px;
   left: 50%;
   transform: translateX(-50%);
   color: #22303c;
-  font-size: 1rem;
+  font-size: 2rem;
   background: rgba(255,255,255,0.7);
-  padding: 6px 14px;
-  border-radius: 10px;
+  padding: 12px 28px;
+  border-radius: 20px;
   pointer-events: none;
 }
 
@@ -213,14 +213,14 @@ html, body {
 
 .camera-instruction {
   position: absolute;
-  top: 24px;
+  top: 48px;
   left: 0;
   right: 0;
   text-align: center;
   color: #fff;
   font-family: "Letters for Learners", sans-serif;
-  font-size: 1.4rem;
-  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  font-size: 2.8rem;
+  text-shadow: 0 4px 12px rgba(0,0,0,0.6);
   margin: 0;
   pointer-events: none;
 }
@@ -228,12 +228,12 @@ html, body {
 .camera-controls {
   position: relative;
   background: #000;
-  padding: 18px 20px;
+  padding: 36px 40px;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 20px;
-  min-height: 84px;
+  gap: 40px;
+  min-height: 168px;
 }
 
 .camera-controls .corner-text-btn {
@@ -247,8 +247,8 @@ html, body {
   justify-content: center;
   align-items: center;
   gap: 0.04em;
-  max-width: 520px;
-  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  max-width: 1040px;
+  font-size: clamp(2.2rem, 6vw, 3.2rem);
   text-align: center;
   line-height: 1.3;
 }
@@ -260,14 +260,14 @@ html, body {
 
 .camera-main-btn {
   font-family: "Letters for Learners", sans-serif;
-  font-size: 1.5rem;
+  font-size: 3rem;
   color: #fff;
   background: #ff3b30;
   border: none;
-  border-radius: 14px;
-  padding: 14px 28px;
+  border-radius: 28px;
+  padding: 28px 56px;
   cursor: pointer;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.35);
 }
 
 .camera-main-btn:hover {
@@ -276,17 +276,17 @@ html, body {
 
 .camera-secondary-btn {
   font-family: "Letters for Learners", sans-serif;
-  font-size: 1.5rem;
+  font-size: 3rem;
   color: #222;
   background: #fff;
   border: none;
-  border-radius: 14px;
-  padding: 14px 28px;
+  border-radius: 28px;
+  padding: 28px 56px;
   cursor: pointer;
-  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+  box-shadow: 0 12px 28px rgba(0,0,0,0.35);
 }
 
 .camera-confirm-controls {
   display: flex;
-  gap: 20px;
+  gap: 40px;
 }
