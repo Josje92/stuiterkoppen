@@ -1,0 +1,292 @@
+@font-face {
+  font-family: "Letters for Learners";
+  src: url("../Letters for Learners.ttf") format("truetype");
+  font-display: swap;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background: #ffffff;
+  font-family: "Letters for Learners", sans-serif;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.screen {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---------- HOME SCREEN ---------- */
+
+#home-screen {
+  background: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4rem;
+}
+
+.rainbow-title {
+  margin: 0;
+  display: flex;
+  font-size: clamp(2.5rem, 9vw, 7rem);
+  letter-spacing: 0.02em;
+  user-select: none;
+}
+
+.rainbow-title .letter {
+  display: inline-block;
+  white-space: pre;
+}
+
+.square-btn {
+  width: clamp(150px, 20vw, 220px);
+  height: clamp(150px, 20vw, 220px);
+  border-radius: 18px;
+  background: #ffffff;
+  border: 6px solid #222;
+  cursor: pointer;
+  position: relative;
+  padding: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-image:
+    linear-gradient(#ffffff, #ffffff),
+    linear-gradient(90deg,
+      #ff3b30, #ff9500, #ffcc00, #34c759, #00c7be, #30b0c7, #007aff, #5856d6, #af52de, #ff2d55);
+  background-origin: border-box;
+  background-clip: padding-box, border-box;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.15);
+  transition: transform 0.15s ease;
+}
+
+.square-btn:hover {
+  transform: scale(1.04);
+}
+
+.square-btn:active {
+  transform: scale(0.97);
+}
+
+.square-btn span {
+  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  color: #222;
+}
+
+/* ---------- SCENE SCREEN ---------- */
+
+#scene-screen {
+  background: #cfe8ff;
+}
+
+#three-canvas {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: grab;
+}
+
+.corner-text-btn {
+  position: fixed;
+  border: none;
+  background: transparent;
+  font-family: "Letters for Learners", sans-serif;
+  font-size: 1.8rem;
+  color: #222;
+  cursor: pointer;
+  padding: 10px 14px;
+}
+
+.corner-bottom-left {
+  left: 20px;
+  bottom: 20px;
+}
+
+.crosshair {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 22px;
+  height: 22px;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  z-index: 10;
+}
+
+.crosshair::before,
+.crosshair::after {
+  content: "";
+  position: absolute;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 2px rgba(0, 0, 0, 0.6);
+}
+
+.crosshair::before {
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: 100%;
+  transform: translateX(-50%);
+}
+
+.crosshair::after {
+  top: 50%;
+  left: 0;
+  height: 2px;
+  width: 100%;
+  transform: translateY(-50%);
+}
+
+.fly-hint {
+  position: fixed;
+  top: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #22303c;
+  font-size: 1rem;
+  background: rgba(255,255,255,0.7);
+  padding: 6px 14px;
+  border-radius: 10px;
+  pointer-events: none;
+}
+
+/* ---------- CAMERA CAPTURE OVERLAY (reusable) ---------- */
+
+.camera-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: #000;
+  display: flex;
+  flex-direction: column;
+}
+
+.camera-stage {
+  position: relative;
+  flex: 1;
+  overflow: hidden;
+  background: #000;
+}
+
+#camera-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scaleX(-1); /* mirror front camera */
+}
+
+#camera-photo-canvas {
+  /* Width/height are set from JS to match the oval's on-screen size, so the
+     confirmed photo appears at the same scale it had while live, instead of
+     being stretched up to fill the whole stage. */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.camera-mask-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.camera-instruction {
+  position: absolute;
+  top: 24px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  color: #fff;
+  font-family: "Letters for Learners", sans-serif;
+  font-size: 1.4rem;
+  text-shadow: 0 2px 6px rgba(0,0,0,0.6);
+  margin: 0;
+  pointer-events: none;
+}
+
+.camera-controls {
+  position: relative;
+  background: #000;
+  padding: 18px 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  min-height: 84px;
+}
+
+.camera-controls .corner-text-btn {
+  color: #fff;
+}
+
+.camera-shoot-hint {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 0.04em;
+  max-width: 520px;
+  font-size: clamp(1.1rem, 3vw, 1.6rem);
+  text-align: center;
+  line-height: 1.3;
+}
+
+.camera-shoot-hint .letter {
+  display: inline-block;
+  white-space: pre;
+}
+
+.camera-main-btn {
+  font-family: "Letters for Learners", sans-serif;
+  font-size: 1.5rem;
+  color: #fff;
+  background: #ff3b30;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 28px;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+}
+
+.camera-main-btn:hover {
+  filter: brightness(1.08);
+}
+
+.camera-secondary-btn {
+  font-family: "Letters for Learners", sans-serif;
+  font-size: 1.5rem;
+  color: #222;
+  background: #fff;
+  border: none;
+  border-radius: 14px;
+  padding: 14px 28px;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0,0,0,0.35);
+}
+
+.camera-confirm-controls {
+  display: flex;
+  gap: 20px;
+}

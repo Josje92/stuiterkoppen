@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="nl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BouncyHeads</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- HOME SCREEN -->
+<section id="home-screen" class="screen">
+  <h1 id="home-title" class="rainbow-title"></h1>
+  <button id="start-btn" class="square-btn">
+    <span>Start</span>
+  </button>
+</section>
+
+<!-- SCENE SCREEN -->
+<section id="scene-screen" class="screen hidden">
+  <canvas id="three-canvas"></canvas>
+  <div id="crosshair" class="crosshair" aria-hidden="true"></div>
+  <button id="klaar-btn" class="corner-text-btn corner-bottom-left">Klaar</button>
+  <p id="fly-hint" class="fly-hint">Klik om te kijken &middot; WASD om te lopen &middot; Esc om los te laten</p>
+</section>
+
+<!-- REUSABLE CAMERA CAPTURE OVERLAY -->
+<div id="camera-overlay" class="camera-overlay hidden">
+  <div class="camera-stage">
+    <video id="camera-video" autoplay playsinline muted></video>
+    <canvas id="camera-photo-canvas" class="hidden"></canvas>
+
+    <svg id="camera-mask-svg" class="camera-mask-svg">
+      <defs>
+        <mask id="oval-mask">
+          <rect id="mask-bg" x="0" y="0" width="100%" height="100%" fill="white"></rect>
+          <ellipse id="oval-cutout" cx="0" cy="0" rx="0" ry="0" fill="black"></ellipse>
+        </mask>
+      </defs>
+      <rect id="mask-overlay-rect" x="0" y="0" width="100%" height="100%" fill="rgba(0,0,0,0.72)" mask="url(#oval-mask)"></rect>
+      <ellipse id="oval-outline" cx="0" cy="0" rx="0" ry="0" fill="none" stroke="#ffffff" stroke-width="4"></ellipse>
+    </svg>
+
+    <p id="camera-instruction" class="camera-instruction">Zorg dat je gezicht binnen de ovaal past</p>
+  </div>
+
+  <div class="camera-controls">
+    <button id="camera-terug-btn" class="corner-text-btn corner-bottom-left">Terug</button>
+    <p id="camera-shoot-hint" class="camera-shoot-hint"></p>
+    <div id="camera-confirm-controls" class="camera-confirm-controls hidden">
+      <button id="camera-retry-btn" class="camera-secondary-btn">Opnieuw</button>
+      <button id="camera-ok-btn" class="camera-main-btn">OK</button>
+    </div>
+  </div>
+</div>
+
+<script type="importmap">
+{
+  "imports": {
+    "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+    "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"
+  }
+}
+</script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
